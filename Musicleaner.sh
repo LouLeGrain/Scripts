@@ -4,7 +4,7 @@ echo "Vider les dossiers de musique des fichiers superflus (thumbs et autres..)"
 
 #Allez c'est parti
 
-#On définie par défaut le chemin de recherche ~/Musique
+#On définit par défaut le chemin de recherche ~/Musique
 #Et un truc bidon pour la saisie, sinon il rentre jamais dans le while..
 pathScan="$HOME/Musique"
 saisiePathScan="carotte"
