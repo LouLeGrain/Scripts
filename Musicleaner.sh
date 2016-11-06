@@ -12,7 +12,7 @@ launchPath="`( cd \"$lauchpath\" && pwd )`"
 #Tant que la saisie sera pas un dossier existant
 while [ ! -e $saisiePathScan ]
 do
-	echo -en "\n> Dossier a scanner (laisser vide pour ~/Musique)"
+	echo -en "\n> Chemin du dossier a scanner (laisser vide pour ~/Musique) "
 	read saisiePathScan
 #Si y'a une entrée, on éxécute, sinon on garde ~/Musique
 	if [ ! -z $saisiePathScan ]
@@ -33,11 +33,13 @@ done
 #On va dans le dossier et on calcule la taille avant pour voir
 cd "$pathScan"
 tailleAvant=`du -sh`
-echo "Taille :$tailleAvant"
-echo -en " Début du scan..."
+echo "Taille du dossier avant nettoyage : $tailleAvant"
+echo -en "Début du scan..."
 touch deleteList.txt
-# listage des fichiers (-v = sauf)
-find -type f | grep -v -e .mp3 -e .flac -e .wav -e .wma -e .m4a -e .ogg -e .zip -e .rar -e .jpg -e .jpeg -e .JPG -e .png -e .PNG > deleteList.txt
+
+# listage des fichiers avec find | grep (-v = sauf)
+find -type f | grep -v -e .mp3 -e .MP3 -e .flac -e .wav -e .wma -e .m4a -e .ogg -e .zip -e .rar -e .jpg -e .jpeg -e .JPG -e .png -e .PNG -e deleteList.txt > deleteList.txt
+
 echo -e "Scan terminé ! \nVérifiez la liste des fichiers a supprimer, puis enregistrez la et quittez l'éditeur."
 sleep 4
 gedit deleteList.txt
@@ -52,5 +54,5 @@ read conf
     fi
  rm deleteList.txt
 tailleApres=`du -sh`
-echo "Taille :$tailleApres"
+echo "Taille du dossier après nettoyage : $tailleApres"
 exit 0;
